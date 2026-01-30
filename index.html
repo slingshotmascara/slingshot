@@ -454,21 +454,22 @@
 
     initCollage();
 
-    // Landing page - force show first but keep experiments loading behind
+   // Landing page - ALWAYS show first on GitHub Pages
 const landing = document.getElementById('landing');
 
-window.addEventListener("load", () => {
+// Reset landing even when page is restored from cache
+window.addEventListener("pageshow", () => {
   landing.classList.remove("hidden");
 
-  // ensure experiments is selected in menu
-  const firstBtn = document.querySelector(".menu button");
-  if (firstBtn) firstBtn.classList.add("active");
-});
-
-landing.addEventListener('click', () => {
-  landing.classList.add('hidden');
+  // keep experiments active behind it
   showPage('experimentation', document.querySelector(".menu button"));
 });
+
+// Hide landing on click
+landing.addEventListener('click', () => {
+  landing.classList.add('hidden');
+});
+
 
     // convert vertical wheel to horizontal scroll on all pages
     const contentDiv = document.querySelector('.content');
