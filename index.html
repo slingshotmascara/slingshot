@@ -112,14 +112,11 @@
       pointer-events: auto;
     }
 
-    .social { left: 50px; }
-    
-
     .social:hover, .about:hover { opacity: .6; }
 
     .content {
       flex: 1;
-      padding-left: 240px;
+      padding-left: 80px;
       padding-right: 80px;
       padding-top: 210px;
       padding-bottom: 60px;
@@ -136,44 +133,98 @@
       display: none; /* Chrome / Safari */
     }
 
-    .page { display: none; max-width: 1250px; margin-left: -10%; }
-    .page.active { display: block; }
-
-    p {
-      line-height: 1.7;
-      color: #222;
-      font-size: 22px;
-      letter-spacing: 1px;
+    .page { 
+      display: none; 
     }
 
+    .page.active {
+      display: block;
+    }
 
-    iframe {
-      width: 80vw;            /* bigger videos */
-      height: 70vh;
-      border: none;
+    /* video pages scroll like experimentation */
+    #finnegan, #zephyr, #bayefall {
+      white-space: nowrap;
+      max-width: none;
+    }
+
+    #finnegan, #zephyr, #bayefall {
+      white-space: nowrap;
+      max-width: none;
+      position: relative;
+    }
+
+    /* Wrapper for iframes to capture scroll */
+    .iframe-wrapper {
+      display: inline-block;
+      position: relative;
       margin-right: 40px;
       margin-bottom: 40px;
-      display: inline-block;
       vertical-align: top;
+      width: 72vw;
+      height: 64vh;
     }
-
-    #finnegan iframe {
-      width: 45vw;
-      height: 45vh;
+    
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      margin: 0;
+      display: block;
+      pointer-events: none; /* Disable by default to allow scrolling */
     }
-
-    #zephyr iframe,
-    #bayefall iframe {
-      width: 45vw;
-      height: 45vh;
+    
+    /* Overlay that enables iframe on click */
+    .iframe-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: transparent;
+      cursor: pointer;
+      z-index: 1;
+      transition: opacity 0.3s;
     }
-
+    
+    /* Show hint on hover */
+    .iframe-wrapper::after {
+      content: 'CLICK TO PLAY';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      letter-spacing: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 2;
+      background: rgba(210, 210, 210, 0.9);
+      padding: 20px 40px;
+    }
+    
+    .iframe-wrapper:hover::after {
+      opacity: 1;
+    }
+    
+    /* When activated, enable iframe and hide overlay */
+    .iframe-wrapper.active::before {
+      display: none;
+    }
+    
+    .iframe-wrapper.active::after {
+      display: none;
+    }
+    
+    .iframe-wrapper.active iframe {
+      pointer-events: auto;
+    }
 
     .clients {
       position: fixed;
       bottom: 40px;
-      left: 50px;              /* align with title/sidebar */
-      transform: none;        /* remove centering */
+      left: 20px;
       font-size: 18px;
       letter-spacing: 3px;
       opacity: .7;
@@ -182,7 +233,9 @@
       z-index: 5;
     }
 
-    #about.active ~ .clients { display: none; }
+    .clients.hidden { 
+      display: none; 
+    }
 
     .collage {
       position: relative;
@@ -204,6 +257,16 @@
 
     .collage-item:active { cursor: grabbing; }
 
+    #about p {
+      font-size: 26px;
+      line-height: 1.6;
+    }
+
+    #about a {
+      color: #111;
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -213,64 +276,73 @@
   <div class="sidebar">
     <div class="brand" onclick="showPage('about')">SLINGSHOT</div>
     <div class="menu">
-      <button class="active" onclick="showPage('experimentation', this)">EXPERIMENTATION</button>
+      <button class="active" onclick="showPage('experimentation', this)">EXPERIMENTS</button>
       <button onclick="showPage('zephyr', this)">ZEPHYR</button>
       <button onclick="showPage('bayefall', this)">BAYE FALL</button>
       <button onclick="showPage('finnegan', this)">FINNEGAN TUI</button>
     </div>
   </div>
 
-  
-  
+  <div class="clients">
+    PREVIOUS CLIENTS - NIKE, SONY, UNIVERSAL MUSIC, VOLKSWAGEN, POLYDOR, BMW, JADEDLDN, ACER, LEE JEANS
+  </div>
 
   <div class="content">
-
-    <div class="clients">
-      PREVIOUS CLIENTS - NIKE, SONY, UNIVERSAL MUSIC, VOLKSWAGEN, POLYDOR, BMW, JADEDLDN, ACER, LEE JEANS
-    </div>
 
     <div id="experimentation" class="page active">
 
       <div class="collage" id="collage">
-        <!-- EXPERIMENTATION GIFS (SAVED LAYOUT) -->
-        <img class="collage-item" data-src="gifs/experimentation-1.gif" style="left: -69px; top: 479px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-3.gif" style="left: -69px; top: -134px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-4.gif" style="left: 467px; top: 479px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-5.gif" style="left: 2077px; top: -140px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-6.gif" style="left: -69px; top: 173px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-8.gif" style="left: 1540px; top: -138px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-9.gif" style="left: 466px; top: 173px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-10.gif" style="left: 1002px; top: 481px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-11.gif" style="left: 2077px; top: 171px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-12.gif" style="left: 466px; top: -135px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-13.gif" style="left: 1539px; top: 482px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-14.gif" style="left: 1540px; top: 172px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-15.gif" style="left: 1003px; top: 172px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-16.gif" style="left: -69px; top: 480px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-17.gif" style="left: 2077px; top: -138px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-18.gif" style="left: 1003px; top: -137px; transform: rotate(0deg); z-index: 999;" />
-        <img class="collage-item" data-src="gifs/experimentation-19.gif" style="left: 2076px; top: 483px; transform: rotate(0deg); z-index: 999;" />
+        <!-- EXPERIMENTATION VIDEOS (SAVED LAYOUT) -->
+        <video class="collage-item" data-src="videos/experimentation-1.mp4" style="left: -69px; top: 479px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-3.mp4" style="left: -69px; top: -134px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-4.mp4" style="left: 467px; top: 479px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-5.mp4" style="left: 2077px; top: -140px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-6.mp4" style="left: -69px; top: 173px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-8.mp4" style="left: 1540px; top: -138px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-9.mp4" style="left: 466px; top: 173px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-10.mp4" style="left: 1002px; top: 481px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-11.mp4" style="left: 2077px; top: 171px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-12.mp4" style="left: 466px; top: -135px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-13.mp4" style="left: 1539px; top: 482px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-14.mp4" style="left: 1540px; top: 172px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-15.mp4" style="left: 1003px; top: 172px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-16.mp4" style="left: -69px; top: 480px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-17.mp4" style="left: 2077px; top: -138px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-18.mp4" style="left: 1003px; top: -137px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
+        <video class="collage-item" data-src="videos/experimentation-19.mp4" style="left: 2076px; top: 483px; transform: rotate(0deg); z-index: 999;" autoplay muted loop playsinline></video>
       </div>
 
     </div>
 
     <div id="zephyr" class="page">
-      <iframe src="https://www.youtube.com/embed/54SxblKJLVg" allowfullscreen></iframe>
+      <div class="iframe-wrapper">
+        <iframe src="https://www.youtube.com/embed/54SxblKJLVg" allowfullscreen></iframe>
+      </div>
     </div>
 
     <div id="bayefall" class="page">
-      <iframe src="https://player.vimeo.com/video/1082279741?h=1db9f8663b" allowfullscreen></iframe>
+      <div class="iframe-wrapper">
+        <iframe src="https://player.vimeo.com/video/1082279741?h=1db9f8663b" allowfullscreen></iframe>
+      </div>
     </div>
 
     <div id="finnegan" class="page">
-      <iframe src="https://spikeadams.com/reel" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/VWEVTCprNh0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/SWyE6l_uQ60" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/hD8spFPys5s" allowfullscreen></iframe>
+      <div class="iframe-wrapper">
+        <iframe src="https://spikeadams.com/reel" allowfullscreen></iframe>
+      </div>
+      <div class="iframe-wrapper">
+        <iframe src="https://www.youtube.com/embed/VWEVTCprNh0" allowfullscreen></iframe>
+      </div>
+      <div class="iframe-wrapper">
+        <iframe src="https://www.youtube.com/embed/SWyE6l_uQ60" allowfullscreen></iframe>
+      </div>
+      <div class="iframe-wrapper">
+        <iframe src="https://www.youtube.com/embed/hD8spFPys5s" allowfullscreen></iframe>
+      </div>
     </div>
 
     <div id="about" class="page">
-      <p>SLINGSHOT is a group of filmmakers working in a variety of fields, unified by their collective excitement about ‘WOMPING’ (definition: serious play).</p>
+      <p>SLINGSHOT is a group of filmmakers working in a variety of fields, unified by their collective excitement about 'WOMPING' (definition: serious play).</p>
       <p>
         <a href="https://spikeadams.com/" target="_blank">SPIKE ADAMS</a>,
         <a href="https://jacktierney.myportfolio.com/" target="_blank">JACK TIERNEY</a>,
@@ -278,7 +350,7 @@
         <a href="https://www.longboifilms.co.uk/" target="_blank">SAM SUTHERLAND</a>
       </p>
       <p style="margin-top:30px;">
-        <a class="social" href="https://www.instagram.com/slingshotmascara/#" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a class="social" href="https://www.instagram.com/slingshotmascara" target="_blank" rel="noopener">INSTAGRAM</a>
       </p>
     </div>
 
@@ -292,19 +364,29 @@
       document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       if(btn) btn.classList.add('active');
+
+      // hide clients on about page
+      const clients = document.querySelector('.clients');
+      if (clients) {
+        if (id === 'about') {
+          clients.classList.add('hidden');
+        } else {
+          clients.classList.remove('hidden');
+        }
+      }
     }
 
     function initCollage() {
       const items = document.querySelectorAll('.collage-item');
-      const EDIT_MODE = true; // set to false when live
+      const EDIT_MODE = false; // set to false when live
 
       let activeItem = null;
       let offset = [0,0];
 
       items.forEach((item, i) => {
-        // ---- AUTOPLAY GIFS ----
-        const realSrc = item.dataset.src;
-        item.src = realSrc + '?play=' + Date.now();
+        // ---- AUTOPLAY VIDEOS ----
+        const realSrc = item.getAttribute('data-src');
+        item.src = realSrc;
 
         if (!EDIT_MODE) return;
 
@@ -329,8 +411,21 @@
 
     initCollage();
 
-    // convert vertical wheel to horizontal scroll
-    document.querySelector('.content').addEventListener('wheel', e => {
+    // convert vertical wheel to horizontal scroll on all pages
+    const contentDiv = document.querySelector('.content');
+    const iframeWrappers = document.querySelectorAll('.iframe-wrapper');
+    
+    // Add click handlers to activate iframes
+    iframeWrappers.forEach(wrapper => {
+      wrapper.addEventListener('click', function(e) {
+        if (!this.classList.contains('active')) {
+          this.classList.add('active');
+        }
+      });
+    });
+    
+    // Add scroll listener to content
+    contentDiv.addEventListener('wheel', e => {
       e.preventDefault();
       e.currentTarget.scrollLeft += e.deltaY;
     }, { passive:false });
