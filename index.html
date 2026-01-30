@@ -238,6 +238,7 @@
     #about p {
       font-size: 26px;
       line-height: 1.6;
+      max-width: 800px;
     }
 
     #about a {
@@ -245,26 +246,39 @@
       text-decoration: underline;
     }
 
-    /* MOBILE RESPONSIVE STYLES */
+    #about .social {
+      text-decoration: none;
+    }
+
+    /* MOBILE RESPONSIVE STYLES - Completely different layout */
     @media (max-width: 768px) {
       body {
         flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .grain {
+        position: absolute; /* Changed from fixed to prevent scroll issues */
       }
 
       .sidebar {
         width: 100%;
-        padding: 20px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
         height: auto;
         border-bottom: 2px solid #111;
+        position: sticky;
+        top: 0;
+        background: #d2d2d2;
+        z-index: 100;
       }
 
       .brand {
-        font-size: 36px;
+        font-size: 40px;
         letter-spacing: 4px;
-        margin: 0;
+        margin: 0 0 15px 0;
         position: static;
       }
 
@@ -272,71 +286,110 @@
         position: static;
         transform: none;
         flex-direction: row;
-        gap: 12px;
+        gap: 10px;
         left: auto;
         flex-wrap: wrap;
-        justify-content: flex-end;
+        width: 100%;
       }
 
       .menu button {
-        font-size: 16px;
+        font-size: 14px;
         letter-spacing: 2px;
+        padding: 8px 0;
       }
 
       .content {
         padding: 20px;
-        padding-top: 40px;
-        height: calc(100vh - 80px);
+        padding-top: 20px;
+        height: auto;
+        overflow-y: visible;
+        overflow-x: hidden;
+        white-space: normal;
       }
 
       .clients {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        font-size: 14px;
-        letter-spacing: 2px;
-        padding: 20px;
+        position: static;
+        font-size: 12px;
+        letter-spacing: 1px;
+        padding: 15px 20px;
         white-space: normal;
-        text-align: center;
+        text-align: left;
+        opacity: 0.8;
+        border-top: 1px solid rgba(0,0,0,0.2);
+        margin-top: 40px;
       }
 
       .collage {
         height: auto;
-        min-height: 400px;
-        margin-top: 20px;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
       }
 
       .collage-item {
-        width: 90vw;
-        max-width: 400px;
+        width: 100% !important;
+        max-width: 100%;
         position: relative !important;
         left: 0 !important;
         top: 0 !important;
-        margin-bottom: 20px;
+        margin-bottom: 0;
         display: block;
         resize: none;
+        height: auto;
+        aspect-ratio: 16/9;
+      }
+
+      #experimentation {
+        white-space: normal;
+      }
+
+      /* Mobile video pages - stack vertically */
+      #finnegan, #zephyr, #bayefall {
+        white-space: normal;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
       }
 
       .iframe-wrapper {
-        width: 90vw;
-        height: 50vh;
-        margin-right: 20px;
-        display: block;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        margin-right: 0;
+        margin-bottom: 0;
+        position: relative;
+      }
+
+      .iframe-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
 
       #landing-text {
         font-size: 48px;
         letter-spacing: 4px;
+        padding: 0 20px;
+        text-align: center;
       }
 
       #about p {
-        font-size: 20px;
+        font-size: 18px;
         white-space: normal;
+        margin-bottom: 20px;
       }
 
-      /* Stack experimentation videos vertically on mobile */
-      #experimentation {
-        white-space: normal;
+      #about .social {
+        position: static;
+        font-size: 20px;
+      }
+
+      /* Disable horizontal scroll on mobile */
+      body, .content {
+        overflow-x: hidden !important;
       }
     }
 
@@ -536,14 +589,25 @@
       }, 1200);
     });
 
-    // Convert vertical wheel to horizontal scroll on all pages
+    // Convert vertical wheel to horizontal scroll on all pages (desktop only)
     const contentDiv = document.querySelector('.content');
     
-    // Add scroll listener to content - works even over videos
-    contentDiv.addEventListener('wheel', e => {
+    // Only enable horizontal scroll on desktop (not mobile)
+    function enableHorizontalScroll() {
+      if (window.innerWidth > 768) {
+        contentDiv.addEventListener('wheel', handleWheel, { passive: false });
+      } else {
+        contentDiv.removeEventListener('wheel', handleWheel);
+      }
+    }
+
+    function handleWheel(e) {
       e.preventDefault();
       e.currentTarget.scrollLeft += e.deltaY;
-    }, { passive:false });
+    }
+
+    enableHorizontalScroll();
+    window.addEventListener('resize', enableHorizontalScroll);
 
   </script>
 </body>
