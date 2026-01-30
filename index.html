@@ -454,20 +454,21 @@
 
     initCollage();
 
-   // Landing page - ALWAYS show first on GitHub Pages
+// LANDING — hard force visible on load (GitHub Pages safe)
 const landing = document.getElementById('landing');
 
-// Reset landing even when page is restored from cache
-window.addEventListener("pageshow", () => {
-  landing.classList.remove("hidden");
+// force visible no matter what cache does
+landing.style.display = 'flex';
+landing.style.opacity = '1';
+landing.style.pointerEvents = 'auto';
 
-  // keep experiments active behind it
-  showPage('experimentation', document.querySelector(".menu button"));
-});
+// keep experiments active behind it
+showPage('experimentation', document.querySelector(".menu button"));
 
-// Hide landing on click
+// hide only when clicked
 landing.addEventListener('click', () => {
-  landing.classList.add('hidden');
+  landing.style.opacity = '0';
+  landing.style.pointerEvents = 'none';
 });
 
 
