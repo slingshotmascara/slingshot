@@ -300,7 +300,7 @@
 <body>
 
   <!-- Landing page overlay -->
-  <div id="landing">
+  <div id="landing" style="display:flex; opacity:1; pointer-events:auto;">
     <div id="landing-text">SLINGSHOT</div>
   </div>
 
@@ -454,18 +454,18 @@
 
     initCollage();
 
-// LANDING — hard force visible on load (GitHub Pages safe)
+// LANDING — hard force visible, GitHub-safe
 const landing = document.getElementById('landing');
 
-// force visible no matter what cache does
+// force visible every time
 landing.style.display = 'flex';
 landing.style.opacity = '1';
 landing.style.pointerEvents = 'auto';
 
-// keep experiments active behind it
+// keep experiments active behind
 showPage('experimentation', document.querySelector(".menu button"));
 
-// hide only when clicked
+// hide only on click
 landing.addEventListener('click', () => {
   landing.style.opacity = '0';
   landing.style.pointerEvents = 'none';
