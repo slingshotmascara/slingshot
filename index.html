@@ -301,7 +301,7 @@
 <body>
 
   <!-- Landing page overlay -->
-  <div id="landing" style="display:flex; opacity:1; pointer-events:auto;">
+  <div id="landing" style="position:fixed; inset:0; display:flex; opacity:1; pointer-events:auto; z-index:999999;">
     <div id="landing-text">SLINGSHOT</div>
   </div>
 
@@ -455,24 +455,16 @@
 
     initCollage();
 
-// LANDING — guaranteed first paint
+// LANDING — guaranteed overlay
 const landing = document.getElementById('landing');
 
-// show landing + preload experiments
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.style.opacity = "1";
+// keep experiments loading behind
+showPage('experimentation', document.querySelector(".menu button"));
 
-  landing.style.display = "flex";
-  landing.style.opacity = "1";
-  landing.style.pointerEvents = "auto";
-
-  showPage('experimentation', document.querySelector(".menu button"));
-});
-
-// hide on click
+// hide only when clicked
 landing.addEventListener('click', () => {
-  landing.style.opacity = "0";
-  landing.style.pointerEvents = "none";
+  landing.style.opacity = '0';
+  landing.style.pointerEvents = 'none';
 });
 
 
