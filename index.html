@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SLINGSHOT</title>
 
   <!-- Retro mono font -->
@@ -56,15 +57,14 @@
       justify-content: flex-start;
       z-index: 2;
       margin-top: 0;
-      position: relative; /* allow centering menu */
+      position: relative;
     }
 
-
     .brand {
-      font-size: 60px; /* 1/3 smaller */
+      font-size: 60px;
       letter-spacing: 6px;
       margin-bottom: 30px;
-      margin-top: -8px; /* raise slightly */
+      margin-top: -8px;
       cursor: pointer;
     }
 
@@ -72,7 +72,7 @@
       display: flex;
       flex-direction: column;
       gap: 18px;
-      position: absolute;          /* center left */
+      position: absolute;
       top: 50%;
       transform: translateY(-50%);
       left: 20px;
@@ -121,16 +121,16 @@
       padding-top: 210px;
       padding-bottom: 60px;
       z-index: 2;
-      overflow-x: auto; /* horizontal scroll */
+      overflow-x: auto;
       overflow-y: hidden;
       height: 100vh;
       white-space: nowrap;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE 10+ */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
 
     .content::-webkit-scrollbar {
-      display: none; /* Chrome / Safari */
+      display: none;
     }
 
     .page { 
@@ -139,12 +139,6 @@
 
     .page.active {
       display: block;
-    }
-
-    /* video pages scroll like experimentation */
-    #finnegan, #zephyr, #bayefall {
-      white-space: nowrap;
-      max-width: none;
     }
 
     #finnegan, #zephyr, #bayefall {
@@ -170,10 +164,10 @@
       border: none;
       margin: 0;
       display: block;
-      pointer-events: none; /* Disable by default to allow scrolling */
+      pointer-events: none;
     }
     
-    /* Overlay that enables iframe on click */
+    /* Transparent overlay that enables iframe on click */
     .iframe-wrapper::before {
       content: '';
       position: absolute;
@@ -184,36 +178,10 @@
       background: transparent;
       cursor: pointer;
       z-index: 1;
-      transition: opacity 0.3s;
-    }
-    
-    /* Show hint on hover */
-    .iframe-wrapper::after {
-      content: 'CLICK TO PLAY';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      letter-spacing: 4px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-      z-index: 2;
-      background: rgba(210, 210, 210, 0.9);
-      padding: 20px 40px;
-    }
-    
-    .iframe-wrapper:hover::after {
-      opacity: 1;
     }
     
     /* When activated, enable iframe and hide overlay */
     .iframe-wrapper.active::before {
-      display: none;
-    }
-    
-    .iframe-wrapper.active::after {
       display: none;
     }
     
@@ -245,20 +213,20 @@
 
     .collage-item {
       position: absolute;
-      width: 520px; /* 100% bigger */
+      width: 520px;
       cursor: grab;
       user-select: none;
       transition: transform .15s;
-      resize: both;              /* resizable corners */
+      resize: both;
       overflow: auto;
       min-width: 240px;
       min-height: 160px;
-      object-fit: cover;         /* Crop and resize poster/video to fill container */
+      object-fit: cover;
     }
 
     .collage-item:active { cursor: grabbing; }
 
-    /* Landing page overlay */
+    /* Landing page overlay with smooth fade */
     #landing {
       position: fixed;
       top: 0;
@@ -271,12 +239,16 @@
       justify-content: center;
       z-index: 10000;
       cursor: pointer;
-      transition: opacity 0.5s ease;
+      opacity: 1;
+      transition: opacity 1.2s ease-out;
+    }
+
+    #landing.fading {
+      opacity: 0;
     }
 
     #landing.hidden {
-      opacity: 0;
-      pointer-events: none;
+      display: none;
     }
 
     #landing-text {
@@ -295,11 +267,136 @@
       text-decoration: underline;
     }
 
+    /* MOBILE RESPONSIVE STYLES */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        border-bottom: 2px solid #111;
+      }
+
+      .brand {
+        font-size: 36px;
+        letter-spacing: 4px;
+        margin: 0;
+        position: static;
+      }
+
+      .menu {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        gap: 12px;
+        left: auto;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .menu button {
+        font-size: 16px;
+        letter-spacing: 2px;
+      }
+
+      .content {
+        padding: 20px;
+        padding-top: 40px;
+        height: calc(100vh - 80px);
+      }
+
+      .clients {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        font-size: 14px;
+        letter-spacing: 2px;
+        padding: 20px;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .collage {
+        height: auto;
+        min-height: 400px;
+        margin-top: 20px;
+      }
+
+      .collage-item {
+        width: 90vw;
+        max-width: 400px;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin-bottom: 20px;
+        display: block;
+        resize: none;
+      }
+
+      .iframe-wrapper {
+        width: 90vw;
+        height: 50vh;
+        margin-right: 20px;
+        display: block;
+      }
+
+      #landing-text {
+        font-size: 48px;
+        letter-spacing: 4px;
+      }
+
+      #about p {
+        font-size: 20px;
+        white-space: normal;
+      }
+
+      /* Stack experimentation videos vertically on mobile */
+      #experimentation {
+        white-space: normal;
+      }
+    }
+
+    /* Tablet adjustments */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .sidebar {
+        width: 180px;
+      }
+
+      .brand {
+        font-size: 48px;
+      }
+
+      .menu button {
+        font-size: 18px;
+      }
+
+      .content {
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 150px;
+      }
+
+      .iframe-wrapper {
+        width: 80vw;
+        height: 60vh;
+      }
+
+      .collage-item {
+        width: 400px;
+      }
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- Landing page overlay -->
+  <!-- Landing page overlay with smooth fade -->
   <div id="landing">
     <div id="landing-text">SLINGSHOT</div>
   </div>
@@ -411,29 +508,26 @@
 
     function initCollage() {
       const items = document.querySelectorAll('.collage-item');
-      const EDIT_MODE = false; // set to false when live
+      const EDIT_MODE = false;
 
       let activeItem = null;
       let offset = [0,0];
 
       items.forEach((item, i) => {
-        // ---- LOAD AND AUTOPLAY VIDEOS ----
+        // Load and autoplay videos
         const realSrc = item.getAttribute('data-src');
         
-        // Set the source
         item.src = realSrc;
         
-        // When video can play through without stopping, start playing
         item.addEventListener('canplaythrough', function() {
           this.play().catch(e => console.log('Autoplay prevented:', e));
         }, { once: true });
         
-        // Start loading the video
         item.load();
 
         if (!EDIT_MODE) return;
 
-        // ---- DRAG ----
+        // Drag functionality for edit mode
         item.addEventListener('mousedown', e => {
           activeItem = item;
           offset = [item.offsetLeft - e.clientX, item.offsetTop - e.clientY];
@@ -454,17 +548,21 @@
 
     initCollage();
 
-    // Landing page - hide on click
+    // Landing page - smooth fade on click
     const landing = document.getElementById('landing');
     landing.addEventListener('click', () => {
-      landing.classList.add('hidden');
+      landing.classList.add('fading');
+      // Wait for fade animation to complete before hiding
+      setTimeout(() => {
+        landing.classList.add('hidden');
+      }, 1200);
     });
 
-    // convert vertical wheel to horizontal scroll on all pages
+    // Convert vertical wheel to horizontal scroll on all pages
     const contentDiv = document.querySelector('.content');
     const iframeWrappers = document.querySelectorAll('.iframe-wrapper');
     
-    // Add click handlers to activate iframes
+    // Add click handlers to activate iframes (no visual text overlay)
     iframeWrappers.forEach(wrapper => {
       wrapper.addEventListener('click', function(e) {
         if (!this.classList.contains('active')) {
@@ -473,7 +571,7 @@
       });
     });
     
-    // Add scroll listener to content
+    // Add scroll listener to content - works even over videos
     contentDiv.addEventListener('wheel', e => {
       e.preventDefault();
       e.currentTarget.scrollLeft += e.deltaY;
