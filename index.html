@@ -19,6 +19,7 @@
       color: #111;
       position: relative;
       overflow: hidden;
+      opacity: 0;
     }
 
     .grain {
@@ -454,21 +455,24 @@
 
     initCollage();
 
-// LANDING — hard force visible, GitHub-safe
+// LANDING — guaranteed first paint
 const landing = document.getElementById('landing');
 
-// force visible every time
-landing.style.display = 'flex';
-landing.style.opacity = '1';
-landing.style.pointerEvents = 'auto';
+// show landing + preload experiments
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.style.opacity = "1";
 
-// keep experiments active behind
-showPage('experimentation', document.querySelector(".menu button"));
+  landing.style.display = "flex";
+  landing.style.opacity = "1";
+  landing.style.pointerEvents = "auto";
 
-// hide only on click
+  showPage('experimentation', document.querySelector(".menu button"));
+});
+
+// hide on click
 landing.addEventListener('click', () => {
-  landing.style.opacity = '0';
-  landing.style.pointerEvents = 'none';
+  landing.style.opacity = "0";
+  landing.style.pointerEvents = "none";
 });
 
 
