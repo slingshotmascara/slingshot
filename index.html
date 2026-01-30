@@ -454,11 +454,21 @@
 
     initCollage();
 
-    // Landing page - hide on click
-    const landing = document.getElementById('landing');
-    landing.addEventListener('click', () => {
-      landing.classList.add('hidden');
-    });
+    // Landing page - force show first but keep experiments loading behind
+const landing = document.getElementById('landing');
+
+window.addEventListener("load", () => {
+  landing.classList.remove("hidden");
+
+  // ensure experiments is selected in menu
+  const firstBtn = document.querySelector(".menu button");
+  if (firstBtn) firstBtn.classList.add("active");
+});
+
+landing.addEventListener('click', () => {
+  landing.classList.add('hidden');
+  showPage('experimentation', document.querySelector(".menu button"));
+});
 
     // convert vertical wheel to horizontal scroll on all pages
     const contentDiv = document.querySelector('.content');
