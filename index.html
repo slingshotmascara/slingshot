@@ -258,6 +258,33 @@
 
     .collage-item:active { cursor: grabbing; }
 
+    /* Landing page overlay */
+    #landing {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #d2d2d2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+
+    #landing.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #landing-text {
+      font-size: 90px;
+      letter-spacing: 6px;
+      animation: jitter 2s steps(2) infinite;
+    }
+
     #about p {
       font-size: 26px;
       line-height: 1.6;
@@ -271,6 +298,11 @@
   </style>
 </head>
 <body>
+
+  <!-- Landing page overlay -->
+  <div id="landing">
+    <div id="landing-text">SLINGSHOT</div>
+  </div>
 
   <div class="grain"></div>
 
@@ -421,6 +453,12 @@
     }
 
     initCollage();
+
+    // Landing page - hide on click
+    const landing = document.getElementById('landing');
+    landing.addEventListener('click', () => {
+      landing.classList.add('hidden');
+    });
 
     // convert vertical wheel to horizontal scroll on all pages
     const contentDiv = document.querySelector('.content');
