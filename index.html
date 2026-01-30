@@ -263,12 +263,13 @@
     #landing {
   position: fixed;
   inset: 0;
-  background: red !important;
-  display: flex !important;
+  background: #d2d2d2;
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999999 !important;
+  z-index: 9999999;
   cursor: pointer;
+  opacity: 1;
 }
 
     #landing.hidden {
@@ -297,7 +298,7 @@
 <body>
 
   <!-- Landing page overlay -->
-  <div id="landing" style="position:fixed; inset:0; display:flex; opacity:1; pointer-events:auto; z-index:999999;">
+  <div id="landing">
     <div id="landing-text">SLINGSHOT</div>
   </div>
 
@@ -451,17 +452,16 @@
 
     initCollage();
 
-// LANDING — guaranteed overlay
+// LANDING — force visible first
 const landing = document.getElementById('landing');
 
-// keep experiments loading behind
+// keep experiments active behind
 showPage('experimentation', document.querySelector(".menu button"));
 
-// hide only when clicked
-// landing.addEventListener('click', () => {
-//   landing.style.opacity = '0';
-//   landing.style.pointerEvents = 'none';
-// });
+// hide only on click
+landing.addEventListener('click', () => {
+  landing.style.display = 'none';
+});
 
 
     // convert vertical wheel to horizontal scroll on all pages
