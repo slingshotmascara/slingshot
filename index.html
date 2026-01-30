@@ -19,7 +19,6 @@
       color: #111;
       position: relative;
       overflow: hidden;
-      opacity: 1;
     }
 
     .grain {
@@ -261,16 +260,19 @@
 
     /* Landing page overlay */
     #landing {
-  position: fixed;
-  inset: 0;
-  background: #d2d2d2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999999;
-  cursor: pointer;
-  opacity: 1;
-}
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #d2d2d2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
 
     #landing.hidden {
       opacity: 0;
@@ -452,17 +454,11 @@
 
     initCollage();
 
-// LANDING — force visible first
-const landing = document.getElementById('landing');
-
-// keep experiments active behind
-showPage('experimentation', document.querySelector(".menu button"));
-
-// hide only on click
-landing.addEventListener('click', () => {
-  landing.style.display = 'none';
-});
-
+    // Landing page - hide on click
+    const landing = document.getElementById('landing');
+    landing.addEventListener('click', () => {
+      landing.classList.add('hidden');
+    });
 
     // convert vertical wheel to horizontal scroll on all pages
     const contentDiv = document.querySelector('.content');
