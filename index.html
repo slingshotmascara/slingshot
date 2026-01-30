@@ -164,10 +164,10 @@
       border: none;
       margin: 0;
       display: block;
-      pointer-events: none; /* Disabled by default for scrolling */
+      pointer-events: none;
     }
 
-    /* Transparent overlay to enable clicking */
+    /* Click to activate overlay */
     .iframe-wrapper::before {
       content: '';
       position: absolute;
@@ -177,10 +177,10 @@
       bottom: 0;
       background: transparent;
       cursor: pointer;
-      z-index: 1;
+      z-index: 2;
     }
 
-    /* When activated, enable iframe and hide overlay */
+    /* When activated, enable iframe */
     .iframe-wrapper.active::before {
       display: none;
     }
@@ -646,6 +646,11 @@
           e.stopPropagation();
         }
       });
+
+      // Add scroll handler to each wrapper to ensure scroll works even over active iframes
+      if (window.innerWidth > 768) {
+        wrapper.addEventListener('wheel', handleWheel, { passive: false });
+      }
     });
 
     // Only enable horizontal scroll on desktop (not mobile)
@@ -654,12 +659,16 @@
         contentDiv.addEventListener('wheel', handleWheel, { passive: false });
       } else {
         contentDiv.removeEventListener('wheel', handleWheel);
+        iframeWrappers.forEach(wrapper => {
+          wrapper.removeEventListener('wheel', handleWheel);
+        });
       }
     }
 
     function handleWheel(e) {
       e.preventDefault();
-      e.currentTarget.scrollLeft += e.deltaY;
+      e.stopPropagation();
+      contentDiv.scrollLeft += e.deltaY;
     }
 
     enableHorizontalScroll();
