@@ -164,29 +164,7 @@
       border: none;
       margin: 0;
       display: block;
-      pointer-events: none;
-    }
-    
-    /* Transparent overlay that enables iframe on click */
-    .iframe-wrapper::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: transparent;
-      cursor: pointer;
-      z-index: 1;
-    }
-    
-    /* When activated, enable iframe and hide overlay */
-    .iframe-wrapper.active::before {
-      display: none;
-    }
-    
-    .iframe-wrapper.active iframe {
-      pointer-events: auto;
+      pointer-events: auto; /* Always enabled */
     }
 
     .clients {
@@ -560,16 +538,6 @@
 
     // Convert vertical wheel to horizontal scroll on all pages
     const contentDiv = document.querySelector('.content');
-    const iframeWrappers = document.querySelectorAll('.iframe-wrapper');
-    
-    // Add click handlers to activate iframes (no visual text overlay)
-    iframeWrappers.forEach(wrapper => {
-      wrapper.addEventListener('click', function(e) {
-        if (!this.classList.contains('active')) {
-          this.classList.add('active');
-        }
-      });
-    });
     
     // Add scroll listener to content - works even over videos
     contentDiv.addEventListener('wheel', e => {
