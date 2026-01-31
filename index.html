@@ -31,9 +31,29 @@
       position: fixed;
       inset: -200px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.35;
+      opacity: 0.25;
       animation: grainMove 0.8s steps(10) infinite;
-      z-index: 999;
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+
+    /* Heavier grain for landing page only */
+    #landing .grain-landing {
+      pointer-events: none;
+      position: fixed;
+      inset: -200px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      animation: grainMove 0.8s steps(10) infinite;
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
+
+    /* Ensure videos and iframes are above the grain */
+    .collage-item,
+    .iframe-wrapper {
+      position: relative;
+      z-index: 10;
     }
 
     @keyframes jitter {
@@ -227,6 +247,7 @@
       min-height: 160px;
       object-fit: cover;
       pointer-events: auto; /* Allow video interaction */
+      z-index: 10;
     }
 
     .collage-item:active { cursor: grabbing; }
@@ -397,6 +418,7 @@
 
   <!-- Landing page overlay with smooth fade -->
   <div id="landing">
+    <div class="grain-landing"></div>
     <div id="landing-text">SLINGSHOT</div>
   </div>
 
