@@ -357,41 +357,50 @@
 
     /* Mobile and Tablet styles */
     @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
       .sidebar {
         width: 100%;
-        padding: 20px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+        padding: 20px 20px 10px 20px;
+        flex-direction: column;
         position: fixed;
         top: 0;
         left: 0;
         z-index: 3;
-        background: transparent;
+        background: #d2d2d2;
       }
 
       .brand {
         font-size: 42px;
-        margin-bottom: 0;
+        margin-bottom: 15px;
         margin-top: 0;
+        text-align: left;
       }
 
       .menu {
         position: static;
         transform: none;
-        flex-direction: column;
-        gap: 12px;
+        flex-direction: row;
+        gap: 15px;
         margin-top: 0;
+        left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
       }
 
       .menu button {
-        font-size: 18px;
+        font-size: 16px;
+        letter-spacing: 2px;
       }
 
       .content {
         padding-left: 20px;
         padding-right: 20px;
-        padding-top: 180px;
+        padding-top: 140px;
+        padding-bottom: 20px;
         overflow-x: hidden;
         overflow-y: auto;
         white-space: normal;
@@ -427,11 +436,17 @@
       }
 
       .clients {
-        position: static;
+        position: relative;
         margin-top: 40px;
-        margin-bottom: 20px;
-        padding: 0 20px;
-        font-size: 14px;
+        margin-bottom: 40px;
+        padding: 0;
+        font-size: 12px;
+        bottom: auto;
+        left: auto;
+      }
+
+      .clients.hidden {
+        display: block;
       }
 
       #landing-text {
