@@ -281,7 +281,70 @@
       font-size: 120px;
       letter-spacing: 18px;
       font-family: 'VT323', monospace;
-      animation: jitter 1.8s steps(3) infinite;
+      animation: 
+        flickerIn 1s ease-in forwards,
+        jitter 1.8s steps(3) infinite 1s,
+        randomFlicker1 0.15s ease-in-out 3.2s,
+        randomFlicker2 0.2s ease-in-out 6.8s,
+        randomFlicker3 0.12s ease-in-out 11.5s,
+        randomFlicker1 0.14s ease-in-out 11.75s,
+        randomFlicker2 0.18s ease-in-out 15.3s,
+        randomFlicker3 0.16s ease-in-out 20.1s,
+        randomFlicker1 0.13s ease-in-out 24.7s,
+        randomFlicker2 0.19s ease-in-out 29.9s,
+        randomFlicker1 0.15s ease-in-out 30.15s,
+        randomFlicker3 0.17s ease-in-out 34.2s,
+        randomFlicker2 0.14s ease-in-out 39.6s,
+        randomFlicker3 0.16s ease-in-out 43.8s,
+        randomFlicker1 0.13s ease-in-out 48.5s,
+        randomFlicker2 0.15s ease-in-out 53.2s,
+        randomFlicker3 0.18s ease-in-out 57.8s,
+        randomFlicker1 0.14s ease-in-out 58.05s;
+      opacity: 0;
+    }
+
+    @keyframes flickerIn {
+      0% { opacity: 0; }
+      70% { opacity: 0.9; }
+      75% { opacity: 0.7; }
+      80% { opacity: 1; }
+      85% { opacity: 0.85; }
+      90% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes randomFlicker1 {
+      0% { opacity: 1; }
+      50% { opacity: 0.75; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes randomFlicker2 {
+      0% { opacity: 1; }
+      30% { opacity: 0.8; }
+      60% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes randomFlicker3 {
+      0% { opacity: 1; }
+      50% { opacity: 0.85; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    #about {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    #about p {
+      margin-left: -60px;
     }
 
     #about a {
