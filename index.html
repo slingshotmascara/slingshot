@@ -229,6 +229,29 @@
       display: none; 
     }
 
+    /* Hide page-clients on desktop */
+    .page-clients {
+      display: none;
+    }
+
+    /* Mobile clients positioning */
+    @media (max-width: 768px) {
+      .clients {
+        display: none; /* Hide the original fixed one on mobile */
+      }
+      
+      .page-clients {
+        display: block;
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 40px 20px 60px 20px;
+        line-height: 1.5;
+        white-space: normal;
+        margin-top: 40px;
+        opacity: .7;
+      }
+    }
+
     .collage {
       position: relative;
       height: 800px;
@@ -545,17 +568,27 @@
         <video class="collage-item" data-src="videos/experimentation-19.mp4" poster="thumbnails/experimentation-19.jpg" style="left: 2076px; top: 483px; transform: rotate(0deg); z-index: 999;" muted loop playsinline preload="none"></video>
       </div>
 
+      <div class="page-clients">
+        PREVIOUS CLIENTS - NIKE, SONY, UNIVERSAL MUSIC,<br>VOLKSWAGEN, POLYDOR, BMW, JADEDLDN, ACER, LEE JEANS
+      </div>
+
     </div>
 
     <div id="zephyr" class="page">
       <div class="iframe-wrapper">
         <iframe src="https://www.youtube.com/embed/54SxblKJLVg?rel=0" allowfullscreen></iframe>
       </div>
+      <div class="page-clients">
+        PREVIOUS CLIENTS - NIKE, SONY, UNIVERSAL MUSIC,<br>VOLKSWAGEN, POLYDOR, BMW, JADEDLDN, ACER, LEE JEANS
+      </div>
     </div>
 
     <div id="bayefall" class="page">
       <div class="iframe-wrapper">
         <iframe src="https://player.vimeo.com/video/1082279741?h=1db9f8663b" allowfullscreen></iframe>
+      </div>
+      <div class="page-clients">
+        PREVIOUS CLIENTS - NIKE, SONY, UNIVERSAL MUSIC,<br>VOLKSWAGEN, POLYDOR, BMW, JADEDLDN, ACER, LEE JEANS
       </div>
     </div>
 
@@ -571,6 +604,9 @@
       </div>
       <div class="iframe-wrapper">
         <iframe src="https://spikeadams.com/reel" allowfullscreen></iframe>
+      </div>
+      <div class="page-clients">
+        PREVIOUS CLIENTS - NIKE, SONY, UNIVERSAL MUSIC,<br>VOLKSWAGEN, POLYDOR, BMW, JADEDLDN, ACER, LEE JEANS
       </div>
     </div>
 
